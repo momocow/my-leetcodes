@@ -1,0 +1,36 @@
+{
+  "name": "my-leetcodes",
+  "version": "1.0.0",
+  "description": "A collection of my LeetCode solutions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint",
+    "commit": "gitmoji -c",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/momocow/my-leetcodes.git"
+  },
+  "keywords": [
+    "leetcode",
+    "solution"
+  ],
+  "author": "MomoCow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/momocow/my-leetcodes/issues"
+  },
+  "homepage": "https://github.com/momocow/my-leetcodes#readme",
+  "devDependencies": {
+    "eslint": "^7.28.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "gitmoji-cli": "^4.1.0",
+    "husky": "^6.0.0",
+    "jest": "^27.0.4"
+  }
+}
