@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:staged": "lint-staged",
     "lint": "eslint",
     "commit": "gitmoji -c",
     "prepare": "husky install"
