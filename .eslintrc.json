@@ -2,7 +2,11 @@
     "env": {
         "browser": true,
         "commonjs": true,
-        "es2021": true
+        "es2021": true,
+        "jest": true
+    },
+    "globals": {
+        "TreeNode": "readonly"
     },
     "extends": [
         "standard"
@@ -11,5 +15,12 @@
         "ecmaVersion": 12
     },
     "rules": {
+        "max-len": [
+            "error",
+            {
+                "code": 80
+            }
+        ],
+        "no-var": "off"
     }
 }

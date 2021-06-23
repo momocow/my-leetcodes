@@ -1,40 +1,34 @@
 const fs = require('fs')
 const path = require('path')
 
-const { buildTestcaseTable } = require('./scripts/testcase')
+const { buildTestcaseTable, runTestcase } = require('./lib/testcase')
+const { TreeNode } = require('./lib/tree')
 
 const problemsDir = path.join(__dirname, 'problems')
 
+beforeAll(() => {
+  global.TreeNode = TreeNode
+})
+
+afterAll(() => {
+  delete global.TreeNode
+})
+
 for (const problem of fs.readdirSync(problemsDir)) {
-    const problemDir = path.resolve(problemsDir, problem)
-    if (fs.statSync(problemDir).isDirectory()) {
-        const testcasesFile = path.resolve(problemDir, 'testcases')
-        const envFile = path.resolve(problemDir, 'env.js')
-        const setupFile = path.resolve(problemDir, 'setup.js')
+  const problemDir = path.resolve(problemsDir, problem)
+  if (fs.statSync(problemDir).isDirectory()) {
+    const testcasesFile = path.resolve(problemDir, 'testcases')
 
-        if (fs.existsSync(envFile)) {
-            Object.assign(global, require(envFile))
+    const fn = require(problemDir)
+
+    describe(problem, () => {
+      test.each(buildTestcaseTable(testcasesFile))(
+        'Case #%#',
+        (...args) => {
+          expect(runTestcase(fn, args.slice(0, -1)))
+            .toEqual(args.slice(-1)[0])
         }
-
-        let inputDeserializer = JSON.parse
-        let outputSerializer = JSON.stringify
-        if (fs.existsSync(setupFile)) {
-            const { serializer, deserializer } = require(setupFile)
-            inputDeserializer = deserializer || inputDeserializer
-            outputSerializer = serializer || outputSerializer
-        }
-
-        const fn = require(problemDir)
-
-        describe(problem, () => {
-            test.each(buildTestcaseTable(testcasesFile, inputDeserializer))(
-                'Case #%#',
-                (...args) => {
-                    const inputs = args.slice(0, -1)
-                    const expected = args.slice(-1)
-                    expect(outputSerializer(fn(...inputs))).toEqual(expected[0])
-                }
-            )
-        })
-    }
+      )
+    })
+  }
 }
