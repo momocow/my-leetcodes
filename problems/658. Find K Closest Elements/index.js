@@ -29,20 +29,17 @@ function binarySearch (arr, target, start = 0, end = arr.length) {
  */
 var findClosestElements = function (arr, k, x) {
   const idx = binarySearch(arr, x)
-  const ret = [arr[idx]]
   let left = idx - 1
   let right = idx + 1
   while (--k) {
     if (right >= arr.length || x - arr[left] <= arr[right] - x) {
-      ret.unshift(arr[left])
       left--
     } else {
-      ret.push(arr[right])
       right++
     }
   }
 
-  return ret
+  return arr.slice(left + 1, right)
 }
 
 module.exports = findClosestElements
