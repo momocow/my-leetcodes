@@ -1,13 +1,19 @@
-const MOD = 1000000007n
+const MOD = 10 ** 9 + 7
+const MOD_N = BigInt(10 ** 9 + 7)
 
 function multiply (m1, m2) {
   const ret = new Array(m1.length)
   for (let i = 0; i < m1.length; i++) {
-    ret[i] = new Array(m2.length).fill(0n)
+    ret[i] = new Array(m2.length).fill(0)
     for (let j = 0; j < m2.length; j++) {
-      let sum = 0n
+      let sum = 0
       for (let k = 0; k < m2.length; k++) {
-        sum = (sum + m1[i][k] * m2[k][j])
+        const p = m1[i][k] * m2[k][j]
+        const prod = p > Number.MAX_SAFE_INTEGER || p < Number.MIN_SAFE_INTEGER
+          ? Number((BigInt(m1[i][k]) * BigInt(m2[k][j])) % MOD_N)
+          : p % MOD
+
+        sum = (sum + prod) % MOD
       }
       ret[i][j] = sum
     }
@@ -18,8 +24,8 @@ function multiply (m1, m2) {
 function Identity (len) {
   const ret = new Array(len)
   for (let i = 0; i < len; i++) {
-    ret[i] = new Array(len).fill(0n)
-    ret[i][i] = 1n
+    ret[i] = new Array(len).fill(0)
+    ret[i][i] = 1
   }
   return ret
 }
@@ -45,18 +51,22 @@ function fastPower (matrix, expo, cb) {
  */
 var countVowelPermutation = function (n) {
   const [[p1, p2, p3, p4]] = multiply(
-    [[1n, 0n, 0n, 0n]],
+    [[1, 0, 0, 0]],
     fastPower(
       [
-        [1n, 1n, 0n, 0n],
-        [1n, 0n, 1n, 0n],
-        [0n, 0n, 1n, 1n],
-        [2n, 0n, 0n, -1n]
+        [1, 1, 0, 0],
+        [1, 0, 1, 0],
+        [0, 0, 1, 1],
+        [2, 0, 0, -1]
       ],
       n - 1
     )
   )
-  return Number((p1 * 5n + p2 * 5n + p3 * 4n + p4 * 2n) % MOD)
+  return (fix(p1) * 5 + fix(p2) * 5 + fix(p3) * 4 + fix(p4) * 2) % MOD
+}
+
+function fix (n) {
+  return n < 0 ? (n + MOD) % MOD : n
 }
 
 module.exports = countVowelPermutation
