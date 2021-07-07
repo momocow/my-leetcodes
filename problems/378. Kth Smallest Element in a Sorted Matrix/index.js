@@ -23,5 +23,3 @@ var kthSmallest = function (matrix, k) {
 }
 
 module.exports = kthSmallest
-kthSmallest([[1, 5, 9], [10, 11, 13], [12, 13, 15]]
-  , 8)
