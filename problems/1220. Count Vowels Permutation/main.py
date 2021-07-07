@@ -46,5 +46,5 @@ class Solution:
             [2, 0, 0, -1]
         ], n - 1)
 
-        # multiply([[1, 0, 0, 0]], factor) == factor[0]
+        # multiply(factor, [[1], [0], [0], [0]]) == factor[0]
         return sum(multiply(factor[0], [[5], [5], [4], [2]])) % MOD
