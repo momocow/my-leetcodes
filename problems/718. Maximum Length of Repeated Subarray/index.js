@@ -1,17 +1,23 @@
-function buildIndex (arr, start = 0, len = arr.length) {
-  let ss = ''
-  for (let j = 0; j < len; j++) {
-    ss += arr[start + j]
-    if (j < len - 1) {
-      ss += ','
+function findIntersect (nums1, nums2, max) {
+  for (let offset = 0; offset < nums2.length; offset++) {
+    let count = 0
+    const intersectLen = nums2.length - offset
+    for (let cursor = 0;
+      intersectLen > max && cursor < intersectLen;
+      cursor++
+    ) {
+      if (nums1[cursor] === nums2[offset + cursor]) {
+        count++
+      } else {
+        max = Math.max(max, count)
+        count = 0
+      }
+    }
+    if (count > 0) {
+      max = Math.max(max, count)
     }
   }
-  return ss
-}
-
-function buildAccSum (arr) {
-  let sum = 0
-  return arr.map(n => (sum += n))
+  return max
 }
 
 /**
@@ -20,32 +26,12 @@ function buildAccSum (arr) {
  * @return {number}
  */
 var findLength = function (nums1, nums2) {
-  if (nums1.length > nums2.length) {
-    const tmp = nums1
-    nums1 = nums2
-    nums2 = tmp
-  }
-  let w = nums1.length
-  const as1 = buildAccSum(nums1)
-  const as2 = buildAccSum(nums2)
-  do {
-    const idx = new Set()
-    const as = new Set()
-    for (let i = 0; i <= nums1.length - w; i++) {
-      idx.add(buildIndex(nums1, i, w))
-      as.add(as1[i + w - 1] - (as1[i - 1] ?? 0))
-    }
-    for (let i = 0; i <= nums2.length - w; i++) {
-      if (
-        as.has(as2[i + w - 1] - (as2[i - 1] ?? 0)) &&
-        idx.has(buildIndex(nums2, i, w))
-      ) {
-        return w
-      }
-    }
-  } while (w--)
-
-  return 0
+  const max = findIntersect(nums1, nums2, 0)
+  return findIntersect(nums2, nums1, max)
 }
 
 module.exports = findLength
+
+findLength(
+  [1, 2, 3, 2, 1],
+  [3, 2, 1, 4])
