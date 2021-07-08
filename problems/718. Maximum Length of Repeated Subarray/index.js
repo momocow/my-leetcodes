@@ -31,7 +31,3 @@ var findLength = function (nums1, nums2) {
 }
 
 module.exports = findLength
-
-findLength(
-  [1, 2, 3, 2, 1],
-  [3, 2, 1, 4])
