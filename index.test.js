@@ -19,20 +19,20 @@ afterAll(() => {
 for (const problem of fs.readdirSync(problemsDir)) {
   const problemDir = path.resolve(problemsDir, problem)
   if (fs.statSync(problemDir).isDirectory()) {
-    const testcasesFile = path.resolve(problemDir, 'testcases')
-    const configFile = path.resolve(problemDir, 'config.js')
-
-    const fn = require(problemDir)
-    const config = fs.existsSync(configFile) ? require(configFile) : {}
-
     describe(problem, () => {
-      test.each(buildTestcaseTable(testcasesFile, config?.testcase?.input))(
-        'Case #%#',
-        (...args) => {
-          expect(runTestcase(fn, args.slice(0, -1)))
-            .toEqual(args.slice(-1)[0])
-        }
-      )
+      const testcasesFile = path.resolve(problemDir, 'testcases')
+      if (fs.existsSync(testcasesFile)) {
+        const configFile = path.resolve(problemDir, 'config.js')
+        const config = fs.existsSync(configFile) ? require(configFile) : {}
+        test.each(buildTestcaseTable(testcasesFile, config?.testcase?.input))(
+          'Case #%#',
+          (...args) => {
+            const fn = require(problemDir)
+            expect(runTestcase(fn, args.slice(0, -1)))
+              .toEqual(args.slice(-1)[0])
+          }
+        )
+      }
     })
   }
 }
