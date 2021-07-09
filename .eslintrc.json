@@ -6,7 +6,8 @@
         "jest": true
     },
     "globals": {
-        "TreeNode": "readonly"
+        "TreeNode": "readonly",
+        "ListNode": "readonly"
     },
     "extends": [
         "standard"
