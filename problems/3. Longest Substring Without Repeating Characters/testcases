@@ -5,6 +5,7 @@ Your input
 ""
 "dvdf"
 "abba"
+"cdd"
 
 Expected
 3
@@ -12,4 +13,5 @@ Expected
 3
 0
 3
+2
 2

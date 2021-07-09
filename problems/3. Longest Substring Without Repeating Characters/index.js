@@ -11,6 +11,9 @@ var lengthOfLongestSubstring = function (s) {
     if (u.has(c)) {
       max = Math.max(max, i - start)
       const end = u.get(c)
+      if (s.length - end - 1 < max) {
+        return max
+      }
       for (let j = start; j < end; j++) {
         u.delete(s[j])
       }
