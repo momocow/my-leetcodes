@@ -13,6 +13,18 @@ const M8 = [[9, 2], [1, 0]]
 const M9 = [[9, 15], [1, 0]]
 const M10 = [[0, 1], [1, 0]]
 
+class Identity extends Array {
+  constructor (len) {
+    super(len)
+    for (let i = 0; i < len; i++) {
+      this[i] = new Array(len).fill(0)
+      this[i][i] = 1
+    }
+  }
+}
+
+const I22 = new Identity(2)
+
 function multiply (m1, m2) {
   const ret = new Array(m1.length)
   for (let i = 0; i < m1.length; i++) {
@@ -35,11 +47,7 @@ function multiply (m1, m2) {
 var numDecodings = function (s) {
   if (s[0] === '0') return 0
 
-  /**
-   * [C(n-1), C(n-2)][], where C(n) is the coefficient of F(n)
-   * @type {[number, number][]}
-   */
-  const coef = []
+  let coef = I22
   for (let i = 0; i < s.length - 1; i++) {
     // validation
     if (
@@ -73,15 +81,11 @@ var numDecodings = function (s) {
     } else {
       mtx = M2
     }
-    coef.push(mtx)
+    coef = multiply(coef, mtx)
   }
   const last = s.slice(-1)
-  let prod = [[last === '*' ? 9 : last === '0' ? 0 : 1], [1]]
-  while (coef.length > 0) {
-    prod = multiply(coef.pop(), prod)
-  }
-
-  return prod[0][0]
+  const prod = [[last === '*' ? 9 : last === '0' ? 0 : 1], [1]]
+  return multiply(coef, prod)[0][0]
 }
 
 module.exports = numDecodings
