@@ -1,0 +1,15 @@
+Your input
+"egg"
+"add"
+"foo"
+"bar"
+"paper"
+"title"
+"badc"
+"baba"
+
+Expected
+true
+false
+true
+false
