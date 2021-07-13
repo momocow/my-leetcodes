@@ -1,0 +1,15 @@
+Your input
+"0"
+"e"
+"."
+".1"
+"-8115e957"
+"Infinity"
+
+Expected
+true
+false
+false
+true
+true
+false
