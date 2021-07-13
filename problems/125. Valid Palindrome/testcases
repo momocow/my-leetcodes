@@ -1,0 +1,9 @@
+Your input
+"A man, a plan, a canal: Panama"
+"race a car"
+" "
+
+Expected
+true
+false
+true
