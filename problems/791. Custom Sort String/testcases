@@ -1,0 +1,6 @@
+Your input
+"cba"
+"abcd"
+
+Expected
+"cbad"
