@@ -26,9 +26,11 @@ var triangleNumber = function (nums) {
   let count = 0
   for (let i = 0; i < nums.length - 2; i++) {
     if (nums[i] === 0) continue
+    let k = i + 2
     for (let j = i + 1; j < nums.length - 1; j++) {
       if (nums[j] === 0) continue
-      count += binarySearch(nums, nums[i] + nums[j], j + 1) - j - 1
+      k = binarySearch(nums, nums[i] + nums[j], k)
+      count += k - j - 1
     }
   }
   return count
