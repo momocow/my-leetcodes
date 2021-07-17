@@ -15,9 +15,8 @@ var fourSum = function (nums, target) {
     const target1 = target - nums[a]
     for (let b = a + 1; b < nums.length - 2; b++) {
       const target2 = target1 - nums[b]
-      let d = Infinity
       for (let c = b + 1; c < nums.length - 1; c++) {
-        d = m.get(target2 - nums[c])
+        const d = m.get(target2 - nums[c])
         if (c >= d) {
           break
         }
