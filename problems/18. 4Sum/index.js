@@ -4,32 +4,36 @@
  * @return {number[][]}
  */
 var fourSum = function (nums, target) {
-  const m = new Map()
+  nums.sort((x, y) => x - y)
+  const m = new Map([[undefined, -1]])
   for (let i = 0; i < nums.length; i++) {
-    const n = nums[i]
-    let s = m.get(n)
-    if (!s) {
-      s = []
-      m.set(n, s)
-    }
-    s.push(i)
+    m.set(nums[i], i)
   }
 
   const ret = []
-  const l = new Set()
-  for (let i = 0; i < nums.length - 3; i++) {
-    for (let j = i + 1; j < nums.length - 2; j++) {
-      for (let k = j + 1; k < nums.length - 1; k++) {
-        const t = target - nums[i] - nums[j] - nums[k]
-        const q = m.get(t)
-        const lb = [nums[i], nums[j], nums[k], t].sort().join(',')
-        if (q && !l.has(lb)) {
-          if (q.filter(ii => ii > k).length > 0) {
-            ret.push([nums[i], nums[j], nums[k], t])
-          }
-          l.add(lb)
+  for (let a = 0; a < nums.length - 3; a++) {
+    const target1 = target - nums[a]
+    for (let b = a + 1; b < nums.length - 2; b++) {
+      const target2 = target1 - nums[b]
+      let d = Infinity
+      for (let c = b + 1; c < nums.length - 1; c++) {
+        d = m.get(target2 - nums[c])
+        if (c >= d) {
+          break
+        }
+        if (d > 0) {
+          ret.push([nums[a], nums[b], nums[c], nums[d]])
+        }
+        while (c + 1 < nums.length - 1 && nums[c + 1] === nums[c]) {
+          c++
         }
       }
+      while (b + 1 < nums.length - 2 && nums[b + 1] === nums[b]) {
+        b++
+      }
+    }
+    while (a + 1 < nums.length - 3 && nums[a + 1] === nums[a]) {
+      a++
     }
   }
   return ret
