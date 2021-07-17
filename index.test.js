@@ -1,9 +1,10 @@
 const fs = require('fs')
 const path = require('path')
 
-const { buildTestcaseTable, runTestcase } = require('./lib/testcase')
+const { buildTestcaseTable } = require('./lib/testcase')
 const { TreeNode } = require('./lib/tree')
 const { ListNode } = require('./lib/list')
+const serialize = require('./lib/serialize')
 
 const problemsDir = path.join(__dirname, 'problems')
 
@@ -28,8 +29,14 @@ for (const problem of fs.readdirSync(problemsDir)) {
           'Case #%#',
           (...args) => {
             const fn = require(problemDir)
-            expect(runTestcase(fn, args.slice(0, -1)))
-              .toEqual(args.slice(-1)[0])
+            const assert = config.assert ?? defaultAssert
+            assert(
+              fn.apply(null, args.slice(0, -1)),
+              args.slice(-1)[0]
+            )
+            function defaultAssert (result, expected) {
+              expect(serialize(result)).toEqual(expected)
+            }
           }
         )
       }
