@@ -1,0 +1,7 @@
+Your input
+"RR.L"
+".L.R...LR..L.."
+
+Expected
+"RR.L"
+"LL.RR.LLRRLL.."
