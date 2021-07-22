@@ -8,10 +8,10 @@ var pushDominoes = function (dominoes) {
   let c = 0
   for (let i = 0; i < dominoes.length; i++) {
     if (t && dominoes[i] === '.') {
-      c /= 2
+      c--
     } else if (dominoes[i] === 'R') {
       t = true
-      c = 1
+      c = dominoes.length
     } else {
       t = false
       c = 0
@@ -22,10 +22,10 @@ var pushDominoes = function (dominoes) {
   c = 0
   for (let j = dominoes.length - 1; j >= 0; j--) {
     if (t && dominoes[j] === '.') {
-      c /= 2
+      c--
     } else if (dominoes[j] === 'L') {
       t = true
-      c = 1
+      c = dominoes.length
     } else {
       t = false
       c = 0
