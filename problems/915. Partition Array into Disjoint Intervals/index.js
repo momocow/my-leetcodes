@@ -7,25 +7,31 @@ function last (arr) {
  * @return {number}
  */
 var partitionDisjoint = function (nums) {
-  let rightMin = Infinity
-  const rightMins = []
-  for (let i = nums.length - 1; i >= 0; i--) {
-    rightMin = Math.min(rightMin, nums[i])
-    if (rightMins.length === 0 || last(rightMins)[1] !== rightMin) {
-      rightMins.push([i, rightMin])
+  let r = nums.length - 1
+  let l = 0
+  let rightMin = nums[r]
+  let leftMax = nums[0]
+  const rightMins = [[r, rightMin]]
+  while (r > 1 && nums[r - 1] >= leftMax) {
+    r--
+    rightMin = Math.min(rightMin, nums[r])
+    if (last(rightMins)[1] !== rightMin) {
+      rightMins.push([r, rightMin])
     }
   }
 
-  let leftMax = -Infinity
-  for (let j = 0; j < nums.length; j++) {
-    leftMax = Math.max(leftMax, nums[j])
-    if (last(rightMins)[0] === j) {
-      rightMins.pop()
-    }
-    if (leftMax <= last(rightMins)[1]) {
-      return j + 1
+  while (++l < r) {
+    leftMax = Math.max(leftMax, nums[l])
+  }
+
+  while (leftMax > last(rightMins)[1]) {
+    r = rightMins.pop()[0] + 1
+    while (++l < r) {
+      leftMax = Math.max(leftMax, nums[l])
     }
   }
+
+  return r
 }
 
 module.exports = partitionDisjoint
