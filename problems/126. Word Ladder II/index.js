@@ -13,6 +13,8 @@ class ReverseTreeNode {
  */
 var findLadders = function (beginWord, endWord, wordList) {
   const wordSet = new Set(wordList)
+  wordSet.delete(beginWord)
+
   const letterSets = Array.from(wordList[0])
     .map(c => new Set([c]))
   for (let i = 1; i < wordList.length; i++) {
@@ -21,13 +23,12 @@ var findLadders = function (beginWord, endWord, wordList) {
     }
   }
 
-  const used = new Set()
   const tree = new ReverseTreeNode(beginWord)
   const target = []
   let leaves = [tree]
-  let level = 1
   let end
-  while (!end && leaves.length > 0 && used.size < wordList.length) {
+
+  while (!end && leaves.length > 0 && wordSet.size > 0) {
     end = false
     const newLeaves = []
     for (const node of leaves) {
@@ -35,7 +36,7 @@ var findLadders = function (beginWord, endWord, wordList) {
         for (const l of letterSets[c]) {
           if (l !== node.val[c]) {
             const adjacent = node.val.substr(0, c) + l + node.val.substr(c + 1)
-            if (wordSet.has(adjacent) && !used.has(adjacent)) {
+            if (wordSet.has(adjacent)) {
               const child = new ReverseTreeNode(adjacent, node)
               newLeaves.push(child)
               if (adjacent === endWord) {
@@ -48,18 +49,17 @@ var findLadders = function (beginWord, endWord, wordList) {
       }
     }
     for (const node of newLeaves) {
-      used.add(node.val)
+      wordSet.delete(node.val)
     }
     leaves = newLeaves
-    level++
   }
 
   const ret = []
   for (let i = 0; i < target.length; i++) {
     let node = target[i]
-    const seq = new Array(level)
-    for (let j = level - 1; j >= 0; j--) {
-      seq[j] = node.val
+    const seq = []
+    while (node) {
+      seq.unshift(node.val)
       node = node.parent
     }
     ret.push(seq)
