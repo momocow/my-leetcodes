@@ -15,14 +15,6 @@ var findLadders = function (beginWord, endWord, wordList) {
   const wordSet = new Set(wordList)
   wordSet.delete(beginWord)
 
-  const letterSets = Array.from(wordList[0])
-    .map(c => new Set([c]))
-  for (let i = 1; i < wordList.length; i++) {
-    for (let j = 0; j < wordList[i].length; j++) {
-      letterSets[j].add(wordList[i][j])
-    }
-  }
-
   const tree = new ReverseTreeNode(beginWord)
   const target = []
   let leaves = [tree]
@@ -33,7 +25,8 @@ var findLadders = function (beginWord, endWord, wordList) {
     const newLeaves = []
     for (const node of leaves) {
       for (let c = 0; c < node.val.length; c++) {
-        for (const l of letterSets[c]) {
+        for (let ascii = 97; ascii <= 122; ascii++) {
+          const l = String.fromCharCode(ascii)
           if (l !== node.val[c]) {
             const adjacent = node.val.substr(0, c) + l + node.val.substr(c + 1)
             if (wordSet.has(adjacent)) {
