@@ -1,0 +1,15 @@
+Your input
+"hit"
+"cog"
+["hot","dot","dog","lot","log","cog"]
+"hit"
+"cog"
+["hot","dot","dog","lot","log"]
+"hot"
+"dog"
+["hot","dog"]
+
+Expected
+[["hit","hot","dot","dog","cog"],["hit","hot","lot","log","cog"]]
+[]
+[]
