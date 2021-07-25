@@ -43,10 +43,10 @@ function countBits (n) {
   }
 }
 
-function fabonacci (iters, n1, n2) {
+function fibonacci (iters, n1, n2) {
   if (iters === 0) return n1
   if (iters === 1) return n2
-  return fabonacci(iters - 1, n1, n2) + fabonacci(iters - 2, n1, n2)
+  return fibonacci(iters - 1, n1, n2) + fibonacci(iters - 2, n1, n2)
 }
 
 function getBit (n, ith) {
@@ -57,7 +57,7 @@ function countOverplus (n, bits) {
   let op = 0
   for (let i = bits - 2; i >= 0; i--) {
     if (getBit(n, i) === 0 && getBit(n, i + 1) === 0) {
-      op += fabonacci(i, 1, 1)
+      op += fibonacci(i, 1, 1)
     } else if (getBit(n, i) !== 0 && getBit(n, i + 1) !== 0) {
       break
     }
@@ -71,7 +71,7 @@ function countOverplus (n, bits) {
  */
 var findIntegers = function (n) {
   const bits = countBits(n)
-  return fabonacci(bits - 1, 2, 3) - countOverplus(n, bits)
+  return fibonacci(bits - 1, 2, 3) - countOverplus(n, bits)
 }
 
 module.exports = findIntegers
