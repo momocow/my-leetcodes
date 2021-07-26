@@ -7,7 +7,7 @@ def multiply(mtx1, mtx2):
     cols = len(mtx2)
     for i in range(rows):
         ret.append([])
-        for j in range(cols):
+        for j in range(rows):
             ret[i].append(0)
             for k in range(cols):
                 ret[i][j] = ret[i][j] + mtx1[i][k] * mtx2[k][j] % MOD
@@ -46,5 +46,5 @@ class Solution:
             [2, 0, 0, -1]
         ], n - 1)
 
-        # multiply(factor, [[1], [0], [0], [0]]) == factor[0]
-        return sum(multiply(factor[0], [[5], [5], [4], [2]])) % MOD
+        # multiply([[1, 0, 0, 0]], factor) == factor[0]
+        return sum(multiply([factor[0]], [[5], [5], [4], [2]])[0]) % MOD
