@@ -1,3 +1,3 @@
 # My LeetCode Solutions
 
-[![MomoCow's LeetCode stats](https://leetcode-stats-six.vercel.app/api?username=momocow)](https://github.com/momocow/my-leetcodes)
+[![MomoCow's LeetCode Progress](https://x.cow.moe/leetcode-progress?username=momocow)](https://github.com/momocow/my-leetcodes)
