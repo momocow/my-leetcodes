@@ -1,40 +1,38 @@
-function findClosest0 (mat, i, j) {
-  for (let dist = 1; true; dist++) {
-    for (let dx = 0, dy = dist; dx <= dist; dx++, dy--) {
-      const left = i - dx
-      const right = i + dx
-      const top = j - dy
-      const bottom = j + dy
-      if (
-        mat[left]?.[top] === 0 ||
-          mat[left]?.[bottom] === 0 ||
-          mat[right]?.[top] === 0 ||
-          mat[right]?.[bottom] === 0
-      ) {
-        return dist
-      }
-    }
-  }
-}
+const DIRECTIONS = [[0, 1], [0, -1], [1, 0], [-1, 0]]
 
 /**
  * @param {number[][]} mat
  * @return {number[][]}
  */
 var updateMatrix = function (mat) {
-  const ret = []
+  const q = []
+  const d = new Array(mat.length)
+
   for (let i = 0; i < mat.length; i++) {
-    ret.push([])
+    d[i] = new Array(mat[i].length)
     for (let j = 0; j < mat[i].length; j++) {
-      if (mat[i][j] === 1) {
-        ret[i].push(findClosest0(mat, i, j))
+      if (mat[i][j] === 0) {
+        q.push([i, j])
+        d[i][j] = 0
       } else {
-        ret[i].push(0)
+        d[i][j] = Infinity
       }
     }
   }
 
-  return ret
+  while (q.length > 0) {
+    const [r, c] = q.shift()
+    const dist = d[r][c] + 1
+    DIRECTIONS
+      .map(([x, y]) => [r + x, c + y])
+      .filter(([x, y]) => d[x]?.[y] > dist)
+      .forEach(([x, y]) => {
+        d[x][y] = dist
+        q.push([x, y])
+      })
+  }
+
+  return d
 }
 
 module.exports = updateMatrix
