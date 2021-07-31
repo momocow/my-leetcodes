@@ -2,7 +2,7 @@
  * Initialize your data structure here.
  */
 var MapSum = function () {
-  this.map = new Map([[undefined, 0]])
+  this.map = new Map()
   this.indexes = {}
 }
 
