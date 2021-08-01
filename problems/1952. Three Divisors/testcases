@@ -1,0 +1,15 @@
+Input
+2
+4
+9
+81
+144
+13
+
+Expected
+false
+true
+true
+false
+false
+false
