@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 const { buildTestcaseTable } = require('./lib/testcase')
-const { TreeNode } = require('./lib/tree')
+const { TreeNode, Node } = require('./lib/tree')
 const { ListNode } = require('./lib/list')
 const serialize = require('./lib/serialize')
 const deserialize = require('./lib/deserialize')
@@ -12,10 +12,13 @@ const problemsDir = path.join(__dirname, 'problems')
 beforeAll(() => {
   global.TreeNode = TreeNode
   global.ListNode = ListNode
+  global.Node = Node
 })
 
 afterAll(() => {
   delete global.TreeNode
+  delete global.ListNode
+  delete global.Node
 })
 
 for (const problem of fs.readdirSync(problemsDir)) {
