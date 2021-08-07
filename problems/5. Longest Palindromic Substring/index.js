@@ -8,7 +8,7 @@ var longestPalindrome = function (s) {
   const table = new Array(s.length)
   for (let i = s.length - 1; i >= 0; i--) { // i = substring start index
     table[i] = new Array(s.length - i)
-    for (let j = s.length - i - 1; j >= maxj; j--) { // j = substring.length - 1
+    for (let j = 0; j < s.length - i; j++) { // j = substring.length - 1
       if (j === 0) { // substring.length === 1
         table[i][j] = true
       } else if (j === 1) { // substring.length === 2
