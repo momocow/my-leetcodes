@@ -1,0 +1,11 @@
+Your input
+"babad"
+"cbbd"
+"a"
+"ac"
+
+Expected
+"bab"
+"bb"
+"a"
+"a"
