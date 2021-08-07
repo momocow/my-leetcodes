@@ -4,25 +4,27 @@
  */
 var longestPalindrome = function (s) {
   let maxi = 0
-  let maxj = 0
-  const table = new Array(s.length)
-  for (let i = s.length - 1; i >= 0; i--) { // i = substring start index
-    table[i] = new Array(s.length - i)
-    for (let j = 0; j < s.length - i; j++) { // j = substring.length - 1
-      if (j === 0) { // substring.length === 1
-        table[i][j] = true
-      } else if (j === 1) { // substring.length === 2
-        table[i][j] = s[i] === s[i + 1]
-      } else {
-        table[i][j] = table[i + 1][j - 2] && s[i] === s[i + j]
+  let maxlen = 0
+  for (let i = 0; i < s.length; i++) {
+    for (let j = 0; j < 2; j++) {
+      if (j === 1 && s[i] !== s[i + 1]) {
+        continue
       }
-      if (table[i][j] && j > maxj) {
-        maxi = i
-        maxj = j
+      let ii = i - 1
+      let jj = i + j + 1
+      let len = j + 1
+      while (ii >= 0 && jj < s.length && s[ii] === s[jj]) {
+        len += 2
+        ii--
+        jj++
+      }
+      if (len > maxlen) {
+        maxi = ii + 1
+        maxlen = len
       }
     }
   }
-  return s.slice(maxi, maxi + maxj + 1)
+  return s.slice(maxi, maxi + maxlen)
 }
 
 module.exports = longestPalindrome
