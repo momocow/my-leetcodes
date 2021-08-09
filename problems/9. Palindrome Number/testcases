@@ -1,0 +1,11 @@
+Your input
+121
+-121
+10
+-101
+
+Expected
+true
+false
+false
+false
