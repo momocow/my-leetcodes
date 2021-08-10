@@ -1,0 +1,13 @@
+Your input
+"III"
+"IV"
+"IX"
+"LVIII"
+"MCMXCIV"
+
+Expected
+3
+4
+9
+58
+1994
