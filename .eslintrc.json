@@ -22,6 +22,7 @@
                 "code": 80
             }
         ],
-        "no-var": "off"
+        "no-var": "off",
+        "no-empty": "off"
     }
 }
