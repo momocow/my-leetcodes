@@ -1,0 +1,7 @@
+Your input
+["flower","flow","flight"]
+["dog","racecar","car"]
+
+Expected
+"fl"
+""
