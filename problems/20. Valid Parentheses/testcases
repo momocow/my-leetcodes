@@ -1,0 +1,13 @@
+Your input
+"()"
+"()[]{}"
+"(]"
+"([)]"
+"{[]}"
+
+Expected
+true
+true
+false
+false
+true
