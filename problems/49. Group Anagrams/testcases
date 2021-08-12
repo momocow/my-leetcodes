@@ -1,0 +1,9 @@
+Your input
+["eat","tea","tan","ate","nat","bat"]
+[""]
+["a"]
+
+Expected
+[["bat"],["nat","tan"],["ate","eat","tea"]]
+[[""]]
+[["a"]]
