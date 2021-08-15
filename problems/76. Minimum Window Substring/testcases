@@ -1,0 +1,12 @@
+Your input
+"ADOBECODEBANC"
+"ABC"
+"a"
+"a"
+"a"
+"aa"
+
+Expected
+"BANC"
+"a"
+""
