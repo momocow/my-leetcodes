@@ -1,15 +1,14 @@
-from functools import lru_cache
-
 MOD = 10**9 + 7
 
 
-@lru_cache(maxsize=None)
-def tree_sum(root):
-    return root.val + tree_sum(root.left) + tree_sum(root.right) if root is not None else 0
+def tree_sums(root, sums=[]):
+    if root is None:
+        return 0
+    left_sum = tree_sums(root.left, sums)
+    right_sum = tree_sums(root.right, sums)
+    sums.append(left_sum + right_sum + root.val)
+    return sums[-1]
 
-
-def max_prod(root, total):
-    return max(tree_sum(root) * (total - tree_sum(root)), max_prod(root.right, total), max_prod(root.left, total)) if root is not None and tree_sum(root) <= total / 2 else 0
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -17,8 +16,8 @@ def max_prod(root, total):
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
-
 class Solution:
     def maxProduct(self, root: Optional[TreeNode]) -> int:
-        return max_prod(root, tree_sum(root)) % MOD
+        sums = []
+        half = tree_sums(root, sums) / 2
+        return int(((half*half - pow(min(map(lambda s: abs(s - half), sums)), 2))) % MOD)
