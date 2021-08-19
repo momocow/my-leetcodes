@@ -4,9 +4,8 @@ MOD = 10**9 + 7
 def tree_sums(root, sums=[]):
     if root is None:
         return 0
-    left_sum = tree_sums(root.left, sums)
-    right_sum = tree_sums(root.right, sums)
-    sums.append(left_sum + right_sum + root.val)
+    sums.append(tree_sums(root.left, sums) +
+                tree_sums(root.right, sums) + root.val)
     return sums[-1]
 
 
