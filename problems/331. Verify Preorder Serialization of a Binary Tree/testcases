@@ -1,0 +1,9 @@
+Your input
+"9,3,4,#,#,1,#,#,2,#,6,#,#"
+"1,#"
+"9,#,#,1"
+
+Expected
+true
+false
+false
