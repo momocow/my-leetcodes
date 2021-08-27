@@ -1,0 +1,19 @@
+Your input
+["aba","cdc","eae"]
+["aaa","aaa","aa"]
+["aba","aba","eae", "eae"]
+["aabbcc", "aabbcc","cb"]
+["aabbcc", "aabbcc","cb","abc"]
+["aabbcc", "aabbcc","c","e","aabbcd"]
+["aabbcc", "aabbcc","bc","bcc","aabbccc"]
+["abcabc","abcabc","abcabc","abc","abc","aab"]
+
+Expected
+3
+-1
+-1
+2
+2
+6
+7
+-1
