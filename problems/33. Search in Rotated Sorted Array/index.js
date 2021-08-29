@@ -4,7 +4,7 @@
  * @return {number}
  */
 var search = function (nums, target, left = 0, right = nums.length - 1) {
-  while (left < right) {
+  while (left <= right) {
     if (target === nums[left]) return left
     if (target === nums[right]) return right
 
@@ -25,7 +25,7 @@ var search = function (nums, target, left = 0, right = nums.length - 1) {
       }
     }
   }
-  return left === right && target === nums[left] ? left : -1
+  return -1
 }
 
 module.exports = search
