@@ -13,24 +13,21 @@
 var removeNthFromEnd = function(head, n) {
     let root = null
     let prev = null
-    let victim = head
     let next = head.next
     let end = head
     while (--n) end = end.next
     while (end.next) [
         root,
         prev,
-        victim,
         next,
         end
     ] = [
         root ?? prev,
-        victim,
-        victim.next,
+        prev?.next ?? head,
         next.next,
         end.next
     ]
-    if (victim === end) end = null
+    if (n === 1) end = null
     if (prev) prev.next = next
     root = root ?? prev ?? next
     return root
