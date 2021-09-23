@@ -3,11 +3,11 @@
  * @return {string}
  */
 var breakPalindrome = function(palindrome) {
-    const mid = (palindrome.length - 1) / 2
+    const mid = Math.floor(palindrome.length / 2)
     let i = 0
-    while (i < palindrome.length && (palindrome[i] === 'a' || i === mid)) i++
+    while (i < mid && palindrome[i] === 'a') i++
     if (palindrome.length === 1) return ''
-    if (i === palindrome.length) return palindrome.slice(0, -1) + 'b'
+    if (i === mid) return palindrome.slice(0, -1) + 'b'
     return palindrome.slice(0, i) + 'a' + palindrome.slice(i + 1)
 };
 
