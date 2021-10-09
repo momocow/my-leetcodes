@@ -25,7 +25,15 @@ function trie(words) {
  * @return {string[]}
  */
 var findWords = function(board, words) {
-    const tt = trie(words);
+    const counter = board.flat()
+        .reduce((m, n) => m.set(n, (m.get(n) ?? 0) + 1), new Map());
+    const tt = trie(words.filter(w =>
+        Array.from(
+            w.split('')
+            .reduce((m, n) => m.set(n, (m.get(n) ?? 0) + 1), new Map())
+        )
+        .every(([n, c]) => (counter.get(n) ?? 0) >= c))
+    );
     const done = board.map(r => r.map(() => false));
     const ans = [];  
     function solve (i, j, t, p = '') {
