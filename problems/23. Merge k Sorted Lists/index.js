@@ -28,11 +28,8 @@ var mergeKLists = function(lists) {
         lists[mi] = mn.next;
         mn.next = null;
         if (!root) root = mn;
-        if (!head) head = mn;
-        else {
-            head.next = mn;
-            head = mn;
-        }
+        if (head) head.next = mn;
+        head = mn;
     }
     return root;
 };
