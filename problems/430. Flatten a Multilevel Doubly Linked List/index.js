@@ -33,3 +33,21 @@ var flatten = function(head) {
     if (root.next) root.next.prev = null;
     return root.next;
 };
+
+var flattenRecursive = function(head) {
+    if (!head) return null;
+    
+    const node = new Node(head.val);
+    if (head.child) {
+        node.next = flatten(head.child);
+        node.next.prev = node;
+    }
+    
+    let cur = node;
+    while (cur.next) cur = cur.next;
+    if (head.next) {
+        cur.next = flatten(head.next);
+        cur.next.prev = cur;
+    }
+    return node;
+}
